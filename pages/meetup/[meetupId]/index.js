@@ -12,4 +12,33 @@ const MeetupDetailsPage = () => {
   return <MeetupDetails meetup={DUMMY_MEETUP} />;
 };
 
+export function getStaticPaths() {
+  return {
+    fallback: false,
+    paths: [
+      {
+        params: {
+          meetupId: 'm1',
+        },
+      },
+      {
+        params: {
+          meetupId: 'm2',
+        },
+      },
+    ],
+  };
+};
+
+export function getStaticProps(context) {
+  const { meetupId } = context.params;
+
+  return {
+    props: {
+      ...DUMMY_MEETUP,
+      id: meetupId,
+    },
+  };
+};
+
 export default MeetupDetailsPage;
